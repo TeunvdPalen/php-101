@@ -1,6 +1,12 @@
 <?php
 
-$movie = "Avengers: Endgame";
+$movie = [
+    "titel" => "Avengers: Endgame",
+    "youtube" => "TcMBFSGVi1c",
+    "synopsis" => "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of
+    remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore
+    balance to the universe."
+];
 $directors = [
     "Anthony Russo",
     "Joe Russo"
@@ -71,11 +77,9 @@ $ster = '<i class="fas fa-star"></i>'
 
     <div class="intro">
         <div class="container">
-            <h1>Avengers: Endgame</h1>
-            <iframe class="youtube" width="860" height="515" src="https://www.youtube.com/embed/TcMBFSGVi1c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p>After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of
-                remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore
-                balance to the universe.</p>
+            <h1><?php echo $movie['titel']?></h1>
+            <iframe class="youtube" width="860" height="515" src="https://www.youtube.com/embed/<?php echo $movie['youtube']?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p><?php echo $movie['synopsis']?></p>
         </div>
     </div>
 
@@ -96,8 +100,8 @@ $ster = '<i class="fas fa-star"></i>'
         </ul>
 
         <div class="score">
-            <h2>Score
-                <p>
+            <h2>Score</h2>
+                
                 <div class="ster1 cf">
                     <?php for ($x = 0; $x < $score; $x++) {
                         echo $ster;
@@ -110,27 +114,26 @@ $ster = '<i class="fas fa-star"></i>'
                     }
                     ?>
                 </div>
-                </p>
-            </h2>
+            
         </div>
     </div>
 
-        <div class="reviews">
-            <div class="container">
+    <div class="reviews">
+        <div class="container">
             <h2>User reviews</h2>
             <?php foreach ($reviews as $review) : ?>
                 <div class="review">
                     <h3><?php echo $review["titel"] ?></h3>
                     <p><?php echo $review["naam"] ?></p>
-                    <p><a href='mailto:<?php echo $review["email"] ?>?subject=HTML link'>Send an email</a>
+                    <p><a href='mailto:<?php echo $review["email"] ?>?subject=email_link'>Send an email</a>
                     <p>
                     <p>Score: <?php echo $review["score"] ?> / 10</p>
                     <p><?php echo $review["review"] ?></p>
                     <p><?php echo $review["datum"] ?></p>
                 </div>
             <?php endforeach; ?>
-            </div>
         </div>
+    </div>
 
 </body>
 

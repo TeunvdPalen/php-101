@@ -57,11 +57,14 @@ ul {
 .ster1 {
     color: yellow;
     float: left;
+    font-size: 3.5em;
 }
 
 .ster2 {
     color: rgb(211, 211, 211);
     float: left;
+    font-size: 3.5em;
+
 }
 
 .reviews {
