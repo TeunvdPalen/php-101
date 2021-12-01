@@ -1,0 +1,79 @@
+body {
+    background: grey;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.content {
+    background: white;
+    padding: 10px;
+}
+
+.begroeting {
+    background: black;
+    color: white;
+    padding: 5px 0;
+    margin-bottom: 20px;
+}
+
+.copyright-date {
+    color: red;
+    font-weight: bold;
+}
+
+.score span {
+    color: blue;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.scores {
+    background: lightblue;
+    padding: 5px 10px;
+}
+
+.scores span {
+    background: yellow;
+    color: rgb(26, 24, 7);
+    padding: 5px 10px;
+    border-radius: 50%;
+}
+
+.user-menu {
+    float: right;
+    margin-top: 15px;
+}
+
+.user-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.begroeting-tekst {
+    float: left;
+}
+
+.beheer {
+    background: darkgray;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 15px;
+}
+
+.beheer a {
+    display: inline-block;
+    text-decoration: none;
+    border: 5px solid purple;
+    border-radius: 15px;
+    padding: 7px 17px;
+}
+
+.button {
+    color: tomato;
+    background: turquoise;
+}

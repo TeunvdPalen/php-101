@@ -1,0 +1,83 @@
+body{
+    margin: 0;
+}
+
+.cf:after{
+	content: "";
+	display: table;
+	clear: both;	
+}
+
+.container {
+    width: 960px;
+    margin: auto;
+}
+
+.intro {
+    background: black;
+    color: white;
+    padding: 35px 50px 90px;
+    border-bottom: 5px solid rgba(245, 245, 3, 0.795);
+}
+
+.intro p {
+    font-size: 1.5em;
+    margin: 35px 25px 0;
+}
+
+
+h1 {
+    font-size: 5em;
+    margin-top: 0;
+    color: rgba(245, 245, 3, 0.795);
+    text-align: center;
+}
+
+.youtube {
+    padding: 30px;
+}
+
+h2 {
+    font-size: 3em;
+}
+
+.naam {
+    font-size: 1.3em;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.score {
+    padding: 30px 0 80PX;
+}
+
+.ster1 {
+    color: yellow;
+    float: left;
+}
+
+.ster2 {
+    color: rgb(211, 211, 211);
+    float: left;
+}
+
+.reviews {
+    margin: 30px 0 0;
+    padding: 20PX 20PX;
+    background: rgba(119, 136, 153, 0.582);
+}
+
+.actors li {
+    display: inline-block;
+    padding-right: 50px;
+    font-size: 1.5em;
+}
+
+.review {
+    padding: 10px 30px;
+    background: rgba(211, 211, 211, 0.466);
+    border-bottom: 3px solid rgba(245, 245, 3, 0.795);
+}
