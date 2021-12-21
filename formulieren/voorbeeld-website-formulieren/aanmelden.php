@@ -60,7 +60,7 @@ if ($_POST) {
     </div>
     <div>
       <label for="wachtwoord">Wachtwoord: *</label>
-      <input id="wachtwoord" naam="wachtwoord" value="" type="password" placeholder="Wachtwoord">
+      <input id="wachtwoord" naam="wachtwoord" value="<?php echo $_POST['wachtwoord'] ?? '' ?>" type="password" placeholder="Wachtwoord">
       <?php if(isset($foutmeldingen['wachtwoord'])): ?>
         <span class="error"><?php echo $foutmeldingen['wachtwoord'] ?></span>
       <?php endif; ?>
