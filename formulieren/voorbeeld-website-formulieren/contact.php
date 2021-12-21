@@ -1,4 +1,40 @@
-<!DOCTYPE html>
+<?php
+
+$foutmeldingen = [];
+
+// Als het formulier verzonden / als de array data bevat
+if ($_POST) {
+
+  // Als er geen inhoud in 'naam' zit
+  if(!$_POST['naam']) {
+    $foutmeldingen['naam'] = "Naam is verplciht.";
+  } elseif (strlen($_POST['naam']) < 2) {
+    $foutmeldingen['naam'] = "Je naam moet minstens 2 karakters lang zijn.";
+  }
+
+  if(!$_POST['email']) {
+    $foutmeldingen['email'] = "E-mail is verplciht.";
+  }
+
+  // kan op beide manieren
+  // if (!$_POST['onderwerpt'] ?? false) {
+  if (!isset($_POST['onderwerp'])) {
+    $foutmeldingen['onderwerp'] = "Maak een keuze.";
+  }
+
+  if(!$_POST['bericht']) {
+    $foutmeldingen['bericht'] = "Bericht is verplciht.";
+  }
+
+  if(!isset($_POST['privacybeleid'])) {
+    $foutmeldingen['privacybeleid'] = "privacybelied is verplciht.";
+  }
+
+
+}
+
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -19,51 +55,68 @@
 </nav>
 
 <div class="container">
+
+  <pre><?php print_r($_POST) ?></pre>
+  <pre><?php print_r($foutmeldingen) ?></pre>
+
   <h1>Contacteer ons</h1>
 
-  <form method="post">
-    <!-- <div class="errorlist">
+  <?php if ($_POST && empty($foutmeldingen)): ?>
+    <p>We hebben je bericht goed ontvangen en contacteren je zo spoedig moeglijk.</p>
+    <?php else: ?>
+  <form novalidate method="post">
+
+    <?php if($foutmeldingen): ?>
+    <div class="errorlist">
       <ul>
-        <li>Naam is verplicht</li>
-        <li>E-mailadres is verplicht</li>
-        <li>Bericht is verplicht</li>
-        <li>Naam is verplicht</li>
-        <li>Kies een onderwerp</li>
-        <li>Bericht is verplicht</li>
-        <li>Accepteer het privacybeleid</li>
+        <?php foreach($foutmeldingen as $foutmelding): ?>
+          <li><?php echo $foutmelding ?></li>
+        <?php endforeach; ?>
       </ul>
-    </div> -->
+    </div>
+    <?php endif; ?>
+
     <div>
       <label for="naam">Naam: *</label>
-      <input id="naam" name="naam" value="" type="text" placeholder="Naam">
-      <!-- <span class="error">Naam is verplicht</span> -->
+      <input id="naam" name="naam" value="<?php echo $_POST['naam'] ?? '' ?>" type="text" placeholder="Naam">
+      <?php if($foutmeldingen['naam'] ?? false ): ?>
+        <span class="error"><?php echo $foutmeldingen['naam'] ?></span>
+      <?php endif; ?>
     </div>
     <div>
       <label for="email">E-mailadres: *</label>
-      <input id="email" name="email" value="" type="email" placeholder="E-mailadres">
-      <!-- <span class="error">E-mailadres is verplicht</span> -->
+      <input id="email" name="email" value="<?php echo $_POST['email'] ?? '' ?>" type="email" placeholder="E-mailadres">
+      <?php if($foutmeldingen['email'] ?? false ): ?>
+        <span class="error"><?php echo $foutmeldingen['email'] ?></span>
+      <?php endif; ?>
     </div>
     <div>
       <label for="onderwerp">Onderwerp: *</label>
       <select name="onderwerp" id="onderwerp">
-        <option disabled>-- Kies een onderwerp</option>
-        <option value="algemeen">Algemeen</option>
-        <option value="klacht">Klacht</option>
-        <option value="suggestie">Suggestie of idee</option>
+        <option <?php if (!isset($_POST['onderwerp'])) { echo 'selected'; } ?> disabled>-- Kies een onderwerp</option>
+        <option <?php if (isset($_POST['onderwerp']) && $_POST['onderwerp'] == 'algemeen') { echo 'selected'; } ?> value="algemeen">Algemeen</option>
+        <option <?php if (isset($_POST['onderwerp']) && $_POST['onderwerp'] == 'klacht') { echo 'selected'; } ?> value="klacht">Klacht</option>
+        <option <?php if (isset($_POST['onderwerp']) && $_POST['onderwerp'] == 'suggestie') { echo 'selected'; } ?> value="suggestie">Suggestie of idee</option>
       </select>
-      <!-- <span class="error">Kies een onderwerp</span> -->
+      <?php if (isset($foutmeldingen['onderwerp'])): ?>
+        <span class="error"><?php echo $foutmeldingen['onderwerp'] ?></span>
+      <?php endif; ?>
     </div>
     <div>
       <label for="bericht">Bericht: *</label>
-      <textarea name="bericht" id="bericht"></textarea>
-      <!-- <span class="error">Bericht is verplicht</span> -->
+      <textarea name="bericht" id="bericht"><?php echo $_POST['bericht'] ?? '' ?></textarea>
+      <?php if ($foutmeldingen['bericht'] ?? false ): ?>
+      <span class="error"><?php echo $foutmeldingen['bericht'] ?></span>
+      <?php endif; ?>
     </div>
     <div>
       <label for="privacy">
-        <input name="privacybeleid" type="checkbox" id="privacy">
+        <input <?php if(isset($_POST['privacybeleid'])) { echo 'checked'; } ?> name="privacybeleid" type="checkbox" id="privacy">
         Ik ga akkoord met het privacybeleid
       </label>
-      <!-- <span class="error">Accepteer het privacybeleid</span> -->
+      <?php if ($foutmeldingen['privacybeleid'] ?? false ): ?>
+      <span class="error"><?php echo $foutmeldingen['privacybeleid'] ?></span>
+      <?php endif; ?>
     </div>
     <div>
       <button type="submit">
@@ -72,6 +125,7 @@
     </div>
 
   </form>
+  <?php endif; ?>
 </div>
   
 </body>
