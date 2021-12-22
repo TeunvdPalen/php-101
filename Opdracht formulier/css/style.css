@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+
+body{
+	margin: 0;
+	margin-bottom: 50px;
+	background-image: url(../image/pizzabackground.jpg);
+	font-family: 'Rubik', sans-serif;
+	color: black;
+}
+
+.cf:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container{
+	width: 960px;
+	margin: 0 auto;
+}
+
+header{
+	background: #C97D47;
+}
+
+
+.logo {
+	float: left;
+	width: 150px;
+	height: 150px;
+	margin: auto;
+}
+
+.title {
+	float: left;
+	width: 810px;
+	text-align: center;
+}
+
+#pizzalogo {
+	width: 150px;
+	height: 150px;
+
+}
+
+#hoofd{
+	padding-top: 0.15em;
+	font-size: 5em;
+	font-weight: bold;
+	color: #46BFCA;
+}
+
+.colum4 {
+	width: 235px;
+	float: left;
+	margin: 1em 0;
+}
+
+.colum4 > img {
+	max-width: 225px;
+	padding-left: 5px;
+}
+
+legend{
+	border: 3px solid #7D3F13;
+	background-color: #C97D47;
+	margin-left: 2em;
+	border-radius: 15px;
+}
+
+fieldset {
+	width: 960px;
+	margin-top: 3em;
+	padding: 0;
+	background-color: #46BFCA;
+	border: 3px solid #7D3F13;
+	border-radius: 15px;
+}
+
+h1,h2 {
+	margin: 0.2em 0.5em;
+}
+
+h3 {
+	text-decoration: underline;
+	margin-bottom: 0.2em;
+}
+
+label {
+	padding-left: 0.4em;
+}
+
+button {
+	margin: 0.5em;
+	padding: 0.5em 0.7em;
+	font-size: 2em;
+	font-weight: bold;
+	background-color: #C96051;
+	border: none;
+	border-radius: 15px;
+}
+
+button:hover {
+	background-color: #7D4138;
+	color: white;
+}
+
+img {
+	border-radius: 15px;
+}
+
+.inner{
+	padding: 10px;
+}
