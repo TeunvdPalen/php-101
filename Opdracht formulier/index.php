@@ -123,7 +123,7 @@ if ($_POST) {
                     <h1>Kies een pizza formaat</h1>
                 </legend>
                 <div class="inner">
-                    <?php foreach ($grootte as $value): ?>
+                    <?php foreach ($grootte as $key => $value): ?>
                     <div class="colum4">
                         <img src="image/blank.jpg" alt="<?php echo $value ?> pizza">
                         <label>
