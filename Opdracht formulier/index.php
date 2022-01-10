@@ -1,4 +1,99 @@
-<!DOCTYPE html>
+<?php 
+// gegevens pizza
+
+$grootte = ['klein' => 'Klein', 'medium' => 'Medium', 'groot' => 'Groot', 'extragroot' => 'Extra groot'];
+$saus = ['tomaat' => 'Tomatensaus', 'bbq' => 'BBQ-saus', 'creme' => 'Creme fraiche'];
+$kaas = [
+    'mozzarella' => [
+        'naam' => 'Mozzarella',
+        'foto' => 'images/mozzarella.jpg'
+    ],
+    'emmentaler' => [
+        'naam' => 'Emmentaler',
+        'foto' => 'images/emmentaler.jpg'
+    ],
+    'gouda' => [
+        'naam' => 'Gouda',
+        'foto' => 'images/gouda.jpg'
+    ],
+    'gorgonzola' => [
+        'naam' => 'Gorgonzola',
+        'foto' => 'images/gorgonzola.jpg'
+    ]
+];
+$vlees = [
+    'pepperoni' => [
+        'naam' => 'Pepperoni',
+        'foto' => 'images/pepperonitopping.jpg'
+    ],
+    'ham' => [
+        'naam' => 'Ham',
+        'foto' => 'images/ham.jpg'
+    ],
+    'garnalen' => [
+        'naam' => 'Garnalen',
+        'foto' => 'images/garnalen.jpg'
+    ],
+    'kip' => [
+        'naam' => 'Kip',
+        'foto' => 'images/kip.jpg'
+    ]
+];
+$groenten = [
+    'ui' => [
+        'naam' => 'Ui',
+        'foto' => 'images/ui.jpg'
+    ],
+    'tomaat' => [
+        'naam' => 'Verse tomaat',
+        'foto' => 'images/tomaat.jpg'
+    ],
+    'olijf' => [
+        'naam' => 'Zwarte olijven',
+        'foto' => 'images/olijf.jpg'
+    ],
+    'paprika' => [
+        'naam' => 'Paprika',
+        'foto' => 'images/paprika.jpg'
+    ],
+    'jalapeno' => [
+        'naam' => 'Jalapeno',
+        'foto' => 'images/jalapeno.jpg'
+    ],
+    'lente_ui' => [
+        'naam' => 'Lente ui',
+        'foto' => 'images/lente_ui.jpg'
+    ],
+    'champignons' => [
+        'naam' => 'Champignons',
+        'foto' => 'images/champignon.jpg'
+    ],
+    'spinazie' => [
+        'naam' => 'Spinazie',
+        'foto' => 'images/spinazie.jpg'
+    ],
+    
+];
+
+// einde pizza gegevens
+
+$foutmeldingen = [];
+
+if ($_POST) {
+    // Pizza validatie
+    if (!$_POST['keuze_formaat']) {
+        $foutmeldingen['keuze_formaat'] = 'Kies welk formaat van pizza je wilt';
+    }
+
+    // Formulier validatie
+    // if (!$_POST['naam']) {
+    //     $foutmeldingen['naam'] = 'Naam is ver^plicht';
+    // } elseif (strlen($_POST['naam']) < 2) {
+    //     $foutmeldingen['naam'] = 'Je naam moet minstens 2 karakters bevatten';
+    // }
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,35 +117,24 @@
 
     <form method="post">
         <div class="container">
+            <pre><?php print_r($_POST) ?></pre>
             <fieldset>
                 <legend>
-                    <h1>Kies een pizza</h1>
+                    <h1>Kies een pizza formaat</h1>
                 </legend>
                 <div class="inner">
+                    <?php foreach ($grootte as $value): ?>
                     <div class="colum4">
-                        <img src="image/pepperoni.jpg" alt="pepperoni pizza">
+                        <img src="image/blank.jpg" alt="<?php echo $value ?> pizza">
                         <label>
-                            Pepperoni <input type="radio" name="keuze_pizza" required>
+                            <?php echo $value ?> <input type="radio" id="keuze_formaat" name="keuze_formaat">
                         </label>
                     </div>
-                    <div class="colum4">
-                        <img src="image/tonno.jpg" alt="tonijn pizza">
-                        <label>
-                            Tonno <input type="radio" name="keuze_pizza" required>
-                        </label>
-                    </div>
-                    <div class="colum4">
-                        <img src="image/vijfkaas.jpg" alt="5 soorten kaas pizza">
-                        <label>
-                            4 Cheese <input type="radio" name="keuze_pizza" required>
-                        </label>
-                    </div>
-                    <div class="colum4">
-                        <img src="image/blank.jpg" alt="">
-                        <label>
-                            Be the chef <input type="radio" name="keuze_pizza" required>
-                        </label>
-                    </div>
+                    <?php if ($foutmeldingen['keuze_fromaat']  ?? false): ?>
+                        <span><?php echo $foutmeldingen['keuze_formaat'] ?></span>
+                    <?php endif ?>
+                    <?php endforeach ?>
+
                 </div>
             </fieldset>
 
@@ -60,136 +144,42 @@
                 </legend>
                 <div class="inner">
                     <h3>Saus</h3>
-
+                    <?php foreach ($saus as $key => $value): ?>
                     <label>
-                        Tomatensaus <input type="radio" name="keuze_saus" required>
+                        <?php echo $value ?> <input type="radio" id="keuze_saus" name="<?php echo $key ?>">
                     </label>
-
-                    <label>
-                        BBQ-saus <input type="radio" name="keuze_saus" required>
-                    </label>
-
-                    <label>
-                        Creme Fraiche <input type="radio" name="keuze_saus" required>
-                    </label>
+                    <?php endforeach ?>
 
                     <h3>Kaas</h3>
-
-                    <div class="colum4">
-                        <img src="image/mozzarella.jpg" alt="mozzarrela">
-                        <label>
-                            Mozzarella <input type="checkbox" name="keuze_kaas">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/emmentaler.jpg" alt="Emmentaler">
-                        <label>
-                            Emmentaler <input type="checkbox" name="keuze_kaas">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/gouda.jpg" alt="Gouda & Cheddar">
-                        <label>
-                            Gouda & Cheddar<input type="checkbox" name="keuze_kaas">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/gorgonzola.jpg" alt="Gorgonzola">
-                        <label>
-                            Gorgonzola <input type="checkbox" name="keuze_kaas">
-                        </label>
-                    </div>
+                    <?php foreach ($kaas as $key => $value): ?>
+                        <div class="colum4">
+                            <img src="<?php echo $value['foto']?>" alt="">
+                            <label>
+                                <?php echo $value['naam'] ?> <input type="checkbox" id="keuze_<?php echo $key?>" name="<?php echo $key ?>">
+                            </label>
+                        </div>
+                    <?php endforeach ?>
 
                     <h3>Vlees</h3>
-
-                    <div class="colum4">
-                        <img src="image/pepperonitopping.jpg" alt="pepperoni">
-                        <label>
-                            Pepperoni <input type="checkbox" name="keuze_vlees">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/ham.jpg" alt="ham">
-                        <label>
-                            Ham <input type="checkbox" name="keuze_vlees">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/garnalen.jpg" alt="garnalen">
-                        <label>
-                            garnalen <input type="checkbox" name="keuze_vlees">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/kip.jpg" alt="kip">
-                        <label>
-                            Kip <input type="checkbox" name="keuze_vlees">
-                        </label>
-                    </div>
+                    <?php foreach ($vlees as $key => $value): ?>
+                        <div class="colum4">
+                            <img src="<?php echo $value['foto']?>" alt="">
+                            <label>
+                                <?php echo $value['naam'] ?> <input type="checkbox" id="keuze_<?php echo $key?>" name="<?php echo $key ?>">
+                            </label>
+                        </div>
+                    <?php endforeach ?>
 
                     <h3>Groenten</h3>
+                    <?php foreach ($groenten as $key => $value): ?>
+                        <div class="colum4">
+                            <img src="<?php echo $value['foto']?>" alt="">
+                            <label>
+                                <?php echo $value['naam'] ?> <input type="checkbox" id="keuze_<?php echo $key?>" name="<?php echo $key ?>">
+                            </label>
+                        </div>
+                    <?php endforeach ?>
 
-                    <div class="colum4">
-                        <img src="image/ui.jpg" alt="ui">
-                        <label>
-                            Ui <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/tomaat.jpg" alt="tomaat">
-                        <label>
-                            Verse tpmaat <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/olijf.jpg" alt="zwarte olijven">
-                        <label>
-                            Zwarte olijven <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/paprika.jpg" alt="paprika">
-                        <label>
-                            Paprika <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/jalapeno.jpg" alt="Jalapenos">
-                        <label>
-                            Jalapenos <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/lente_ui.jpg" alt="Lent ui">
-                        <label>
-                            Lente ui <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/champignon.jpg" alt="Champignon">
-                        <label>
-                            Champignons <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
-
-                    <div class="colum4">
-                        <img src="image/spinazie.jpg" alt="spinazie">
-                        <label>
-                            Spinazie <input type="checkbox" name="keuze_groenten">
-                        </label>
-                    </div>
                 </div>
             </fieldset>
 
@@ -200,24 +190,24 @@
                 <div class="inner">
                     <h3>Adres</h3>
                     <label>
-                        Voornaam: <input type="text" required class="gegevens">
+                        Voornaam: <input type="text" class="gegevens">
                     </label>
                     <label>
-                        Familienaam: <input type="text" required class="gegevens">
+                        Familienaam: <input type="text" class="gegevens">
                     </label><br>
                     <label>
-                        Straat: <input type="text" required class="gegevens">
+                        Straat: <input type="text" class="gegevens">
                     </label>
                     <label>
-                        Gemeente: <input type="text" required class="gegevens">
+                        Gemeente: <input type="text" class="gegevens">
                     </label>
                     <label>
-                        Postcode: <input type="text" required class="gegevens">
+                        Postcode: <input type="text" class="gegevens">
                     </label>
 
                     <h3>Bezorg tijd</h3>
                     <label>
-                        Tijd: <input type="time" required class="gegevens">
+                        Tijd: <input type="time" class="gegevens">
                     </label><br>
 
                     <label>
