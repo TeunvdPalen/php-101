@@ -17,7 +17,14 @@ $results = $query->fetchAll();
 </head>
 
 <body>
+
 	<pre><?php print_r($results) ?></pre>
+
+	<?php foreach($results as $groep): ?>
+	<ul>
+		<li><?php echo $groep['omschrijving'] ?></li>
+	</ul>
+	<?php endforeach ?>
 </body>
 
 </html>

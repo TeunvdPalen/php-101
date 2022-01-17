@@ -204,12 +204,9 @@ if ($_POST) {
 	}
 
 	// Bezorgng validatie
-	if ($_POST['bezorgtijd'] == '--:--') {
-		$foutmeldingen['bezordtijd'] = 'Je moet een bezorg tijd invullen';
+	if (!$_POST['bezorgtijd']) {
+		$foutmeldingen['bezorgtijd'] = 'Je moet een bezorgtijd invullen';
 	} 
-	// elseif (!preg_match("/^(?:20|[01][1-9]):[0-5][0-9]$/", $_POST['bezorgtijd'])) {
-	// 	$foutmeldingen = 'Kies een bozrg tijd tijdens onze openings uren';
-	// }
 
 	// Privacy validatie
 	if (!$_POST['privacy']) {
@@ -243,6 +240,11 @@ if ($_POST) {
 	<?php if ($foutmeldingen == false && $_POST) : ?>
 	<div class="container">
 		<h1>Betalen</h1>
+		<ul>
+			<?php if($_POST['keuze_formaat']): ?>
+			<li><?php echo $_POST['keuze_formaat'] ?></li>
+			<?php endif ?>
+		</ul>
 	</div>
 	<?php else : ?>
 	<form novalidate method="post">
@@ -397,10 +399,24 @@ if ($_POST) {
 						<span class="error"><?php echo $foutmeldingen['telefoon'] ?></span>
 						<?php endif ?>
 
-						<h3>Bezorg tijd</h3>
+						<h3>Bezorgtijd</h3>
 						<label>
-							Tijd: <input type="time" id="bezorgtijd" name="bezorgtijd"
-								value="<?php echo $_POST['bezorgtijd'] ?? '' ?>">
+							Tijd: <select id="bezorgtijd" name="bezorgtijd">
+								<option <?php if(!isset($_POST['bezorgtijd'])) { echo 'selected';} ?> disabled>-- Keuze tijdstip --
+								</option>
+								<option <?php if(isset($_POST['bezorgtijd']) && $_POST['bezorgtijd'] == '15:00') { echo 'selected';} ?>
+									value="15:00">15:00 </option>
+								<option <?php if(isset($_POST['bezorgtijd']) && $_POST['bezorgtijd'] == '16:00') { echo 'selected';} ?>
+									value="16:00">16:00 </option>
+								<option <?php if(isset($_POST['bezorgtijd']) && $_POST['bezorgtijd'] == '17:00') { echo 'selected';} ?>
+									value="17:00">17:00 </option>
+								<option <?php if(isset($_POST['bezorgtijd']) && $_POST['bezorgtijd'] == '18:00') { echo 'selected';} ?>
+									value="18:00">18:00 </option>
+								<option <?php if(isset($_POST['bezorgtijd']) && $_POST['bezorgtijd'] == '19:00') { echo 'selected';} ?>
+									value="19:00">19:00 </option>
+								<option <?php if(isset($_POST['bezorgtijd']) && $_POST['bezorgtijd'] == '20:00') { echo 'selected';} ?>
+									value="20:00">20:00 </option>
+							</select>
 						</label>
 						<?php if (isset($foutmeldingen['bezorgtijd'])) : ?>
 						<span class="error"><?php echo $foutmeldingen['bezorgtijd'] ?></span>
