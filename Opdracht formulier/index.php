@@ -137,23 +137,23 @@ if ($_POST) {
 	// Pizza validatie
 	// Formaat
 	if (!isset($_POST['keuze_formaat'])) {
-		$foutmeldingen['keuze_formaat'] = 'Kies welk formaat van pizza je wilt';
+		$foutmeldingen['keuze_formaat'] = 'Kies wat voor formaat van pizza je wilt';
 	}
 	// Saus
 	if (!isset($_POST['keuze_saus'])) {
-		$foutmeldingen['keuze_saus'] = 'Kies welk saus op pizza je wilt';
+		$foutmeldingen['keuze_saus'] = 'Kies wat voor saus je op pizza je wilt';
 	}
 	// Kaas
 	if (!isset($_POST['keuze_kaas'])) {
-		$foutmeldingen['keuze_kaas'] = 'Kies welk kaas op pizza je wilt';
+		$foutmeldingen['keuze_kaas'] = 'Kies wat voor kaas je op pizza je wilt';
 	}
 	// Vlees
 	if (!isset($_POST['keuze_vlees'])) {
-		$foutmeldingen['keuze_vlees'] = 'Kies welk vlees op pizza je wilt';
+		$foutmeldingen['keuze_vlees'] = 'Kies wat voor vlees je op pizza je wilt';
 	}
 	// Groenten
 	if (!isset($_POST['keuze_groenten'])) {
-		$foutmeldingen['keuze_groenten'] = 'Kies welk groenten op pizza je wilt';
+		$foutmeldingen['keuze_groenten'] = 'Kies wat voor groenten je op pizza je wilt';
 	}
 
 	// Formulier validatie
@@ -203,10 +203,18 @@ if ($_POST) {
 		$foutmeldingen['telefoon'] = 'De telefoon nummer is te lang';
 	}
 
+	// Bezorgng validatie
+	if ($_POST['bezorgtijd'] == '--:--') {
+		$foutmeldingen['bezordtijd'] = 'Je moet een bezorg tijd invullen';
+	} 
+	// elseif (!preg_match("/^(?:20|[01][1-9]):[0-5][0-9]$/", $_POST['bezorgtijd'])) {
+	// 	$foutmeldingen = 'Kies een bozrg tijd tijdens onze openings uren';
+	// }
+
 	// Privacy validatie
 	if (!$_POST['privacy']) {
-		$foutmeldingen['privacy'] = 'Je moet akkor gaan met het privacybeleid';
-	}
+		$foutmeldingen['privacy'] = 'Je moet akkoord gaan met het privacybeleid';
+	} 
 }
 
 ?>
@@ -214,214 +222,214 @@ if ($_POST) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Pizza</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Pizza</title>
 </head>
 
 <body>
-  <header class="cf">
-    <div class="container">
-      <div class="logo">
-        <img id="pizzalogo" src="images/pizzalogo.svg" alt="logo">
-      </div>
-      <div class="title">
-        <h1 id="hoofd">Pizza House</h1>
-      </div>
-    </div>
-  </header>
+	<header class="cf">
+		<div class="container">
+			<div class="logo">
+				<img id="pizzalogo" src="images/pizzalogo.svg" alt="logo">
+			</div>
+			<div class="title">
+				<h1 id="hoofd">Pizza House</h1>
+			</div>
+		</div>
+	</header>
 
-  <?php if ($foutmeldingen == false && $_POST) : ?>
-  <div class="container">
-    <h1>Betalen</h1>
-  </div>
-  <?php else : ?>
-  <form novalidate method="post">
-    <div class="container">
-      <pre><?php print_r($_POST) ?></pre>
-      <fieldset>
-        <legend>
-          <h1>Kies een pizza formaat</h1>
-        </legend>
-        <div class="inner">
-          <?php foreach ($grootte as $key => $value) : ?>
-          <div class="colum4">
-            <img src="<?php echo $value['foto'] ?>" alt="<?php echo $value['naam'] ?> pizza">
-            <label>
-              <?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input <?php if (isset($_POST['keuze_formaat']) && $_POST['keuze_formaat'] == $value['naam']) {
-																																												echo "checked";
-																																											} ?> type="radio" id="keuze_<?php echo $key ?>" name="keuze_formaat"
-                value="<?php echo $value['naam'] ?>">
-            </label>
-          </div>
-          <?php endforeach ?>
-          <?php if (isset($foutmeldingen['keuze_formaat'])) : ?>
-          <span class="error"><?php echo $foutmeldingen['keuze_formaat'] ?></span>
-          <?php endif ?>
+	<?php if ($foutmeldingen == false && $_POST) : ?>
+	<div class="container">
+		<h1>Betalen</h1>
+	</div>
+	<?php else : ?>
+	<form novalidate method="post">
+		<div class="container">
+			<pre><?php print_r($_POST) ?></pre>
+			<fieldset>
+				<legend>
+					<h1>Kies een pizza formaat</h1>
+				</legend>
+				<div class="inner">
+					<?php foreach ($grootte as $key => $value) : ?>
+					<div class="colum4">
+						<img src="<?php echo $value['foto'] ?>" alt="<?php echo $value['naam'] ?> pizza">
+						<label>
+							<?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input
+								<?php if (isset($_POST['keuze_formaat']) && $_POST['keuze_formaat'] == $value['naam']) { echo "checked"; } ?>
+								type="radio" id="keuze_<?php echo $key ?>" name="keuze_formaat" value="<?php echo $value['naam'] ?>">
+						</label>
+					</div>
+					<?php endforeach ?>
+					<?php if (isset($foutmeldingen['keuze_formaat'])) : ?>
+					<span class="error"><?php echo $foutmeldingen['keuze_formaat'] ?></span>
+					<?php endif ?>
 
-        </div>
-      </fieldset>
+				</div>
+			</fieldset>
 
-      <fieldset>
-        <legend>
-          <h2>Be the chef</h2>
-        </legend>
-        <div class="inner">
-          <h3>Saus</h3>
-          <?php foreach ($saus as $key => $value) : ?>
-          <label>
-            <?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input <?php if (isset($_POST['keuze_saus']) && $_POST['keuze_saus'] == $value['naam']) {
-																																											echo "checked";
-																																										} ?> type="radio" id="keuze_<?php echo $key ?>"
-              value="<?php echo $value['naam'] ?>" name="keuze_saus">
-          </label>
-          <?php endforeach ?>
-          <?php if (isset($foutmeldingen['keuze_saus'])) : ?>
-          <span class="error"><?php echo $foutmeldingen['keuze_saus'] ?></span>
-          <?php endif ?>
+			<fieldset>
+				<legend>
+					<h2>Be the chef</h2>
+				</legend>
+				<div class="inner">
+					<h3>Saus</h3>
+					<?php foreach ($saus as $key => $value) : ?>
+					<label>
+						<?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input
+							<?php if (isset($_POST['keuze_saus']) && $_POST['keuze_saus'] == $value['naam']) { echo "checked"; } ?>
+							type="radio" id="keuze_<?php echo $key ?>" value="<?php echo $value['naam'] ?>" name="keuze_saus">
+					</label>
+					<?php endforeach ?>
+					<?php if (isset($foutmeldingen['keuze_saus'])) : ?>
+					<span class="error"><?php echo $foutmeldingen['keuze_saus'] ?></span>
+					<?php endif ?>
 
-          <h3>Kaas</h3>
-          <?php foreach ($kaas as $key => $value) : ?>
-          <div class="colum4">
-            <img src="<?php echo $value['foto'] ?>" alt="<?php echo $value['naam'] ?>">
-            <label>
-              <?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input <?php if (isset($_POST['keuze_kaas']) && in_array($value['naam'], $_POST['keuze_kaas']) == $value['naam']) {
-																																												echo "checked";
-																																											} ?> type="checkbox" id="keuze_<?php echo $key ?>"
-                value="<?php echo $value['naam'] ?>" name="keuze_kaas[]">
-            </label>
-          </div>
-          <?php endforeach ?>
-          <?php if (isset($foutmeldingen['keuze_kaas'])) : ?>
-          <span class="error"><?php echo $foutmeldingen['keuze_kaas'] ?></span>
-          <?php endif ?>
+					<h3>Kaas</h3>
+					<?php foreach ($kaas as $key => $value) : ?>
+					<div class="colum4">
+						<img src="<?php echo $value['foto'] ?>" alt="<?php echo $value['naam'] ?>">
+						<label>
+							<?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input
+								<?php if (isset($_POST['keuze_kaas']) && in_array($value['naam'], $_POST['keuze_kaas']) == $value['naam']) { echo "checked"; } ?>
+								type="checkbox" id="keuze_<?php echo $key ?>" value="<?php echo $value['naam'] ?>" name="keuze_kaas[]">
+						</label>
+					</div>
+					<?php endforeach ?>
+					<?php if (isset($foutmeldingen['keuze_kaas'])) : ?>
+					<span class="error"><?php echo $foutmeldingen['keuze_kaas'] ?></span>
+					<?php endif ?>
 
-          <h3>Vlees</h3>
-          <?php foreach ($vlees as $key => $value) : ?>
-          <div class="colum4">
-            <img src="<?php echo $value['foto'] ?>" alt="<?php echo $value['naam'] ?>">
-            <label>
-              <?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input <?php if (isset($_POST['keuze_vlees']) && in_array($value['naam'], $_POST['keuze_vlees']) == $value['naam']) {
-																																												echo "checked";
-																																											} ?> type="checkbox" id="keuze_<?php echo $key ?>"
-                value="<?php echo $value['naam'] ?>" name="keuze_vlees[]">
-            </label>
-          </div>
-          <?php endforeach ?>
-          <?php if (isset($foutmeldingen['keuze_vlees'])) : ?>
-          <span class="error"><?php echo $foutmeldingen['keuze_vlees'] ?></span>
-          <?php endif ?>
+					<h3>Vlees</h3>
+					<?php foreach ($vlees as $key => $value) : ?>
+					<div class="colum4">
+						<img src="<?php echo $value['foto'] ?>" alt="<?php echo $value['naam'] ?>">
+						<label>
+							<?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input
+								<?php if (isset($_POST['keuze_vlees']) && in_array($value['naam'], $_POST['keuze_vlees']) == $value['naam']) { echo "checked"; } ?>
+								type="checkbox" id="keuze_<?php echo $key ?>" value="<?php echo $value['naam'] ?>" name="keuze_vlees[]">
+						</label>
+					</div>
+					<?php endforeach ?>
+					<?php if (isset($foutmeldingen['keuze_vlees'])) : ?>
+					<span class="error"><?php echo $foutmeldingen['keuze_vlees'] ?></span>
+					<?php endif ?>
 
-          <h3>Groenten</h3>
-          <?php foreach ($groenten as $key => $value) : ?>
-          <div class="colum4">
-            <img src="<?php echo $value['foto'] ?>" alt="">
-            <label>
-              <?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input <?php if (isset($_POST['keuze_groenten']) && in_array($value['naam'], $_POST['keuze_groenten']) == $value['naam']) {
-																																												echo "checked";
-																																											} ?> type="checkbox" id="keuze_<?php echo $key ?>"
-                value="<?php echo $value['naam'] ?>" name="keuze_groenten[]">
-            </label>
-          </div>
-          <?php endforeach ?>
-          <?php if (isset($foutmeldingen['keuze_groenten'])) : ?>
-          <span class="error"><?php echo $foutmeldingen['keuze_groenten'] ?></span>
-          <?php endif ?>
+					<h3>Groenten</h3>
+					<?php foreach ($groenten as $key => $value) : ?>
+					<div class="colum4">
+						<img src="<?php echo $value['foto'] ?>" alt="">
+						<label>
+							<?php echo $value['naam'] ?> <?php echo $value['prijs'] ?>€ <input
+								<?php if (isset($_POST['keuze_groenten']) && in_array($value['naam'], $_POST['keuze_groenten']) == $value['naam']) { echo "checked"; } ?>
+								type="checkbox" id="keuze_<?php echo $key ?>" value="<?php echo $value['naam'] ?>"
+								name="keuze_groenten[]">
+						</label>
+					</div>
+					<?php endforeach ?>
+					<?php if (isset($foutmeldingen['keuze_groenten'])) : ?>
+					<span class="error"><?php echo $foutmeldingen['keuze_groenten'] ?></span>
+					<?php endif ?>
 
-        </div>
-      </fieldset>
+				</div>
+			</fieldset>
 
-      <fieldset>
-        <legend>
-          <h2>Gegevens</h2>
-        </legend>
-        <div class="inner">
-          <div class="flex">
-            <h3>Adres</h3>
+			<fieldset>
+				<legend>
+					<h2>Gegevens</h2>
+				</legend>
+				<div class="inner">
+					<div class="flex">
+						<h3>Adres</h3>
 
-            <!-- Naam en voornaam -->
-            <label for="voornaam">Vooraam: *</label>
-            <input name="voornaam" value="<?php echo $_POST['voornaam'] ?? '' ?>" id="voornaam" type="text"
-              class="invulveld" placeholder="Voornaam">
-            <?php if (isset($foutmeldingen['voornaam'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['voornaam'] ?></span>
-            <?php endif ?>
+						<!-- Naam en voornaam -->
+						<label for="voornaam">Vooraam: *</label>
+						<input name="voornaam" value="<?php echo $_POST['voornaam'] ?? '' ?>" id="voornaam" type="text"
+							class="invulveld" placeholder="Voornaam">
+						<?php if (isset($foutmeldingen['voornaam'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['voornaam'] ?></span>
+						<?php endif ?>
 
-            <label for="familienaam">Familenaam: *</label>
-            <input name="familienaam" value="<?php echo $_POST['familienaam'] ?? '' ?>" id="familienaam" type="text"
-              class="invulveld" placeholder="Familienaam">
-            <?php if (isset($foutmeldingen['familienaam'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['familienaam'] ?></span>
-            <?php endif ?><br>
+						<label for="familienaam">Familenaam: *</label>
+						<input name="familienaam" value="<?php echo $_POST['familienaam'] ?? '' ?>" id="familienaam" type="text"
+							class="invulveld" placeholder="Familienaam">
+						<?php if (isset($foutmeldingen['familienaam'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['familienaam'] ?></span>
+						<?php endif ?><br>
 
-            <!-- Adres -->
-            <label for="straat">Straat: *</label>
-            <input name="straat" value="<?php echo $_POST['straat'] ?? '' ?>" id="straat" type="text" class="invulveld"
-              placeholder="Straat">
-            <?php if (isset($foutmeldingen['straat'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['straat'] ?></span>
-            <?php endif ?>
+						<!-- Adres -->
+						<label for="straat">Straat: *</label>
+						<input name="straat" value="<?php echo $_POST['straat'] ?? '' ?>" id="straat" type="text" class="invulveld"
+							placeholder="Straat">
+						<?php if (isset($foutmeldingen['straat'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['straat'] ?></span>
+						<?php endif ?>
 
-            <label for="gemeente">Gemeente: *</label>
-            <input name="gemeente" value="<?php echo $_POST['gemeente'] ?? '' ?>" id="gemeente" type="text"
-              class="invulveld" placeholder="Gemeente">
-            <?php if (isset($foutmeldingen['gemeente'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['gemeente'] ?></span>
-            <?php endif ?>
+						<label for="gemeente">Gemeente: *</label>
+						<input name="gemeente" value="<?php echo $_POST['gemeente'] ?? '' ?>" id="gemeente" type="text"
+							class="invulveld" placeholder="Gemeente">
+						<?php if (isset($foutmeldingen['gemeente'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['gemeente'] ?></span>
+						<?php endif ?>
 
-            <label for="postcode">Postcode: *</label>
-            <input name="postcode" value="<?php echo $_POST['postcode'] ?? '' ?>" id="postcode" type="text"
-              class="invulveld" placeholder="Postcode">
-            <?php if (isset($foutmeldingen['postcode'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['postcode'] ?></span>
-            <?php endif ?>
+						<label for="postcode">Postcode: *</label>
+						<input name="postcode" value="<?php echo $_POST['postcode'] ?? '' ?>" id="postcode" type="text"
+							class="invulveld" placeholder="Postcode">
+						<?php if (isset($foutmeldingen['postcode'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['postcode'] ?></span>
+						<?php endif ?>
 
 
-            <!-- Tel/Email -->
-            <label for="email">E-mailadres: *</label>
-            <input name="email" value="<?php echo $_POST['email'] ?? '' ?>" id="email" type="email" class="invulveld"
-              placeholder="E-mailadres">
-            <?php if (isset($foutmeldingen['email'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['email'] ?></span>
-            <?php endif ?>
+						<!-- Tel/Email -->
+						<label for="email">E-mailadres: *</label>
+						<input name="email" value="<?php echo $_POST['email'] ?? '' ?>" id="email" type="email" class="invulveld"
+							placeholder="E-mailadres">
+						<?php if (isset($foutmeldingen['email'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['email'] ?></span>
+						<?php endif ?>
 
-            <label for="telefoon">Telefoon: *</label>
-            <input name="telefoon" value="<?php echo $_POST['telefoon'] ?? '' ?>" id="telefoon" type="text"
-              class="invulveld" placeholder="Telefoon">
-            <?php if (isset($foutmeldingen['telefoon'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['telefoon'] ?></span>
-            <?php endif ?>
+						<label for="telefoon">Telefoon: *</label>
+						<input name="telefoon" value="<?php echo $_POST['telefoon'] ?? '' ?>" id="telefoon" type="text"
+							class="invulveld" placeholder="Telefoon">
+						<?php if (isset($foutmeldingen['telefoon'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['telefoon'] ?></span>
+						<?php endif ?>
 
-            <h3>Bezorg tijd</h3>
-            <label>
-              Tijd: <input type="time">
-            </label><br>
+						<h3>Bezorg tijd</h3>
+						<label>
+							Tijd: <input type="time" id="bezorgtijd" name="bezorgtijd"
+								value="<?php echo $_POST['bezorgtijd'] ?? '' ?>">
+						</label>
+						<?php if (isset($foutmeldingen['bezorgtijd'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['bezorgtijd'] ?></span>
+						<?php endif ?>
+						<br>
 
-            <label>
-              <input type="checkbox" name="nieuwsbrief"> Ik wil graag de nieuwsbrief ontvangen.
-            </label><br>
+						<label>
+							<input type="checkbox" name="nieuwsbrief"> Ik wil graag de nieuwsbrief ontvangen.
+						</label><br>
 
-            <label>
-              <input <?php if (isset($_POST['privacy'])) {
-													echo "checked";
-												} ?> type="checkbox" id="privacy" name="privacy"> Ik ga akkoord met het privacybeleid
-            </label>
-            <?php if (isset($foutmeldingen['privacy'])) : ?>
-            <span class="error"><?php echo $foutmeldingen['privacy'] ?></span>
-            <?php endif ?>
-            <br>
+						<label>
+							<input <?php if (isset($_POST['privacy'])) { echo "checked"; } ?> type="checkbox" id="privacy"
+								name="privacy"> Ik ga akkoord met het privacybeleid
+						</label>
+						<?php if (isset($foutmeldingen['privacy'])) : ?>
+						<span class="error"><?php echo $foutmeldingen['privacy'] ?></span>
+						<?php endif ?>
+						<br>
 
-            <button type="submit">
-              Bevestigen
-            </button>
-          </div>
-        </div>
-      </fieldset>
-    </div>
+						<button type="submit">
+							Bevestigen
+						</button>
+					</div>
+				</div>
+			</fieldset>
+		</div>
 
-  </form>
-  <?php endif; ?>
+	</form>
+	<?php endif; ?>
 
 </body>
 
