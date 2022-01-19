@@ -1,14 +1,18 @@
 <?php 
 
-$conn = new PDO('mysql:host=localhost;dbname=dokterspraktijk;port=3306', 'root', '');
+$conn = new pdo('mysql:host=localhost;dbname=dokterspraktijk;port=3306', 'root', '');
 
-$query = $conn->query('SELECT * FROM patienten ORDER BY geboortedatum ASC');
+$query = $conn->prepare('SELECT * FROM gemeenten WHERE id=:id');
+$query->execute([
+	'id' => $_GET['id']
+]);
+$gemeente = $query->fetch();
+
+$query = $conn->prepare('SELECT * FROM patienten WHERE gemeente_id=:id');
+$query->execute([
+	'id' => $_GET['id']
+]);
 $patienten = $query->fetchAll();
-
-if ($_GET) {
-	$error = $_GET['error'];
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -18,23 +22,19 @@ if ($_GET) {
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<style>
-	.error {
-		color: red;
-	}
-	</style>
+	<title>Gemeente details</title>
 </head>
 
 <body>
 
-	<a href="patient-toevoegen.php">Toevoegen</a>
+	<h1>Gemeente details</h1>
 
-	<?php if (isset($error)) : ?>
-	<h1 class="error"><?php echo $error ?></h1>
-	<?php endif ?>
+	<a href="gemeente-overzicht.php">Gemeente overzicht</a>
 
-	<h1>Patientenoverzicht</h1>
+	<ul>
+		<li><b>Postcode:</b> <?php echo $gemeente['postcode'] ?></li>
+		<li><b>Geleente:</b> <?php echo $gemeente['gemeente'] ?></li>
+	</ul>
 
 	<table border="1">
 		<tr>

@@ -249,7 +249,7 @@ if ($_POST) {
 	<?php else : ?>
 	<form novalidate method="post">
 		<div class="container">
-			<pre><?php print_r($_POST) ?></pre>
+
 			<fieldset>
 				<legend>
 					<h1>Kies een pizza formaat</h1>

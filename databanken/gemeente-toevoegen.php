@@ -5,6 +5,7 @@ $query = $conn->query('SELECT * FROM gemeenten');
 $gemeenten = $query->fetchAll();
 
 $foutmeldingen = [];
+$succes = false;
 
 if ($_POST) {
 	
@@ -29,6 +30,8 @@ if ($_POST) {
 			'gemeente' => $_POST['gemeente'],
 			'postcode' => $_POST['postcode']
 		]);
+		$_POST = [];
+		$succes = true;
 	}
 }
 
@@ -45,14 +48,23 @@ if ($_POST) {
 	.error {
 		color: red;
 	}
+
+	.succes {
+		color: green;
+	}
 	</style>
 </head>
 
 <body>
 
 	<a href="patient-toevoegen.php">Patient toevoegen</a>
+	<a href="gemeente-overzicht.php">Gemeente overzicht</a>
 
 	<h1>Gemeente toevoegen</h1>
+
+	<?php if ($succes): ?>
+	<h2 class="succes">Gemeente succesvol toegevoegd</h2>
+	<?php endif ?>
 
 	<form action="" method="post">
 

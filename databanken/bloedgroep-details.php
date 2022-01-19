@@ -1,14 +1,18 @@
-<?php 
+<?php
 
-$conn = new PDO('mysql:host=localhost;dbname=dokterspraktijk;port=3306', 'root', '');
+$conn = new pdo('mysql:host=localhost;dbname=dokterspraktijk;port=3306', 'root', '');
 
-$query = $conn->query('SELECT * FROM patienten ORDER BY geboortedatum ASC');
+$query = $conn->prepare('SELECT * FROM bloedgroepen WHERE id=:id');
+$query->execute([
+	'id' => $_GET['id']
+]);
+$bloedgroep = $query->fetch();
+
+$query = $conn->prepare('SELECT * FROM patienten WHERE bloedgroep_id=:id');
+$query->execute([
+	'id' => $_GET['id']
+]);
 $patienten = $query->fetchAll();
-
-if ($_GET) {
-	$error = $_GET['error'];
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -18,23 +22,19 @@ if ($_GET) {
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<style>
-	.error {
-		color: red;
-	}
-	</style>
+	<title>Bloedgroep details</title>
 </head>
 
 <body>
 
-	<a href="patient-toevoegen.php">Toevoegen</a>
+	<a href="bloedgroepen-overzicht.php">Bloedgroep overzicht</a>
 
-	<?php if (isset($error)) : ?>
-	<h1 class="error"><?php echo $error ?></h1>
-	<?php endif ?>
+	<h1>Bloedgroep details</h1>
 
-	<h1>Patientenoverzicht</h1>
+	<ul>
+		<li><b>Bloedgroep:</b> <?php echo $bloedgroep['omschrijving'] ?> </li>
+	</ul>
+
 
 	<table border="1">
 		<tr>
@@ -61,7 +61,6 @@ if ($_GET) {
 		<?php endforeach ?>
 
 	</table>
-
 </body>
 
 </html>

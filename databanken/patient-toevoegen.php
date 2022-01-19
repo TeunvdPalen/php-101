@@ -9,6 +9,7 @@ $query = $conn->query('SELECT * FROM gemeenten ORDER BY postcode ASC');
 $gemeenten = $query->fetchAll();
 
 $foutmeldingen=[];
+$succes = false;
 
 if ($_POST) {
 
@@ -30,6 +31,8 @@ if ($_POST) {
 		'geslacht' => $_POST['geslacht'],
 		'telefoonnummer' => $_POST['telefoonnummer']
 	]);
+	$_POST = [];
+	$succes = true;
 
 }
 
@@ -49,6 +52,10 @@ if ($_POST) {
 	<a href="patienten-overzicht.php">overzicht</a>
 
 	<h1>Patien toevoegen</h1>
+
+	<?php if ($succes): ?>
+	<h2>Patient is toegevoegd</h2>
+	<?php endif ?>
 
 	<form method="post">
 		<div>
