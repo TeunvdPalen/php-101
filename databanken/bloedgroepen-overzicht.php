@@ -35,7 +35,7 @@ $bloedgroepen = $query->fetchAll();
 		<?php foreach($bloedgroepen as $bloedgroep): ?>
 		<tr>
 			<td><?php echo $bloedgroep['omschrijving']?></td>
-			<td><a href="bloedgroep-details.php?id=<?php echo $gemeente['id'] ?>">Toon details</a>
+			<td><a href="bloedgroep-details.php?id=<?php echo $bloedgroep['id'] ?>">Toon details</a>
 				<?php endforeach ?>
 		</tr>
 	</table>
