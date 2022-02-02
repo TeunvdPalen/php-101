@@ -2,16 +2,20 @@
 
 include './includes/initialize.php';
 
+$query = $pdo->query('SELECT * FROM categorie');
+$categories = $query->fetchAll();
+
 $foutmeldingen = [];
 
 if ($_POST) {
 	include './includes/item-validation.php';
 
 	if (empty($foutmeldingen)) {
-		$query = $pdo->prepare('INSERT INTO todo_applicatie.todo_items (omschrijving, prioriteit) VALUES (:omschrijving, :prioriteit)');
+		$query = $pdo->prepare('INSERT INTO todo_applicatie.todo_items (omschrijving, prioriteit, categorie_id) VALUES (:omschrijving, :prioriteit, :categorie)');
 		$query->execute([
 			'omschrijving' => $_POST['omschrijving'],
-			'prioriteit' => $_POST['prioriteit']
+			'prioriteit' => $_POST['prioriteit'],
+			'categorie' => $_POST['categorie']
 		]);
 		header('location: index.php');
 		exit;
@@ -34,7 +38,7 @@ if ($_POST) {
 		<h1>Todo items</h1>
 
 		<p>
-			<a href="index.php">Todo items</a>
+			<a href="index.php">Todo items</a> <a href="categorie.php">categorie overzicht</a>
 		</p>
 	</header>
 

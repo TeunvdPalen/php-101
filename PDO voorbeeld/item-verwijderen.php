@@ -9,7 +9,7 @@ if (!isset($_GET['id'])) {
 
 $query = $pdo->prepare('DELETE FROM todo_items WHERE id=:id');
 $query->execute([
-	'id' => $GET['id']
+	'id' => $_GET['id']
 ]);
 
 header('location: index.php');

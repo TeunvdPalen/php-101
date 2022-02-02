@@ -13,6 +13,12 @@ $query->execute([
 ]);
 $item = $query->fetch();
 
+$query = $pdo->prepare('SELECT * FROM categorie WHERE id=:id');
+$query->execute([
+	'id' => $item['categorie_id']
+]);
+$categorie = $query->fetch();
+
 $datum = new DateTime($item['datum']);
 
 ?>
@@ -31,7 +37,7 @@ $datum = new DateTime($item['datum']);
 	<header>
 		<h1>Todo items</h1>
 		<p>
-			<a href="item-toevoegen.php">Nieuw item toevoegen</a>
+			<a href="item-toevoegen.php">Nieuw item toevoegen</a> <a href="index.php">Item overzicht</a>
 		</p>
 	</header>
 
@@ -48,6 +54,13 @@ $datum = new DateTime($item['datum']);
 		<p>Aangemaakt op <?php echo $datum->format('d M Y') ?></p>
 		<p><b>Prioriteit:</b> <?php echo $item['prioriteit'] ?></p>
 		<p><b>Status:</b> <?php echo $item['afgewerkt'] ? 'afgewerkt' : 'Nog af te werken' ?></p>
+		<p><b>Categorie:</b>
+			<?php if (!empty($categorie['naam'])) :?>
+			<a href="categorie-detail.php?id=<?php echo $item['categorie_id'] ?>"><?php echo  $categorie['naam']?></a>
+			<?php else:
+				echo "Geen categorie toegewezen";
+			endif; ?>
+		</p>
 	</section>
 
 </body>

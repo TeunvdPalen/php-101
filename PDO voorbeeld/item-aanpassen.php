@@ -2,6 +2,9 @@
 
 include './includes/initialize.php';
 
+$query = $pdo->query('SELECT * FROM categorie');
+$categories = $query->fetchAll();
+
 if (!isset($_GET['id'])) {
 	header('location: index.php');
 	exit;
@@ -13,12 +16,13 @@ if ($_POST) {
 	include './includes/item-validation.php';
 
 	if (empty($foutmeldingen)) {
-		$query = $pdo->prepare('UPDATE todo_items SET omschrijving=:omschrijving, prioriteit=:prioriteit, afgewerkt=:afgewerkt WHERE id=:id');
+		$query = $pdo->prepare('UPDATE todo_items SET omschrijving=:omschrijving, prioriteit=:prioriteit, afgewerkt=:afgewerkt, categorie_id=:categorie WHERE id=:id');
 		$query->execute([
-			'id' => $_get['id'],
+			'id' => $_GET['id'],
 			'omschrijving' => $_POST['omschrijving'],
 			'prioriteit' => $_POST['prioriteit'],
-			'afgewerkt' => $_POST['afgewerkt'] ?? 0
+			'afgewerkt' => $_POST['afgewerkt'] ?? 0,
+			'categorie' => $_POST['categorie']
 		]);
 		header('location: item-details.php?id='.$_GET['id']);
 		exit;
@@ -47,7 +51,8 @@ if ($_POST) {
 		<h1>Todo items</h1>
 
 		<p>
-			<a href="index.php">Todo items</a>
+			<a href="index.php">Todo items</a> <a href="item-toevoegen.php">Nieuw item toevoegen</a> <a
+				href="categorie.php">Categorie</a> <a href="categorie-toevoegen.php">Categorie toevoegen</a>
 		</p>
 	</header>
 
@@ -63,7 +68,7 @@ if ($_POST) {
 				</label>
 			</div>
 			<div>
-				<input type="submit" value="Toevoegen">
+				<input type="submit" value="Aanpassen">
 			</div>
 		</form>
 	</section>

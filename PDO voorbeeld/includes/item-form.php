@@ -17,6 +17,11 @@
 	</select>
 </div>
 <div>
-	<label for="categorie">Categorie</label>
-	<input type="radio" name="categorie" id="categorie" value="id">
+	<?php foreach ($categories as $categorie) : ?>
+	<label>
+		<?php echo $categorie['naam'] ?><input
+			<?php if (isset($_POST['categorie']) && $_POST['categorie'] == $categorie['id']) { echo "checked"; } ?>
+			type="radio" id="<?php echo $categorie['naam'] ?>" name="categorie" value="<?php echo $categorie['id'] ?>">
+	</label>
+	<?php endforeach ?>
 </div>

@@ -23,7 +23,7 @@ $completed_items = $query->fetchAll();
 	<header>
 		<h1>Todo items</h1>
 		<p>
-			<a href="item-toevoegen.php">Nieuw item toevoegen</a>
+			<a href="item-toevoegen.php">Nieuw item toevoegen</a> <a href="categorie.php">Categorie</a>
 		</p>
 	</header>
 
