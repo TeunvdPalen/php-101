@@ -1,6 +1,7 @@
 <div>
 	<label>
-		Omschrijving <input type="text" name="omschrijving" id="omschrijving">
+		Omschrijving <input type="text" name="omschrijving" id="omschrijving"
+			value="<?php if(!empty($_GET['id'])) { echo $omschrijving['omschrijving']; } ?>">
 	</label>
 	<?php if (isset($foutmeldingen['omschrijving'])): ?>
 	<span><?php echo $foutmeldingen['omschrijving'] ?></span>

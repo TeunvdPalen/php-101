@@ -10,6 +10,12 @@ if (!isset($_GET['id'])) {
 	exit;
 }
 
+$query = $pdo->prepare('SELECT * FROM todo_items WHERE id=:id');
+$query->execute([
+	'id' => $_GET['id']
+]);
+$omschrijving = $query->fetch();
+
 $foutmeldingen = [];
 
 if ($_POST) {
