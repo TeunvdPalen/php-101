@@ -2,11 +2,21 @@
 
 include './includes/initialize.php';
 
-$query = $pdo->query('SELECT * FROM todo_items WHERE afgewerkt=0');
-$todoitems = $query->fetchAll();
+if (!empty($_SESSION)) {
+	$query = $pdo->prepare('SELECT * FROM todo_items WHERE afgewerkt=0 AND gebruiker_id=:id');
+	$query->execute([
+		'id' => $_SESSION['user']['id']
+	]);
+	$todoitems = $query->fetchAll();
 
-$query = $pdo->query('SELECT * FROM todo_items WHERE afgewerkt=1');
-$completed_items = $query->fetchAll();
+	$query = $pdo->prepare('SELECT * FROM todo_items WHERE afgewerkt=1 AND gebruiker_id=:id');
+	$query->execute([
+		'id' => $_SESSION['user']['id']
+	]);
+	$completed_items = $query->fetchAll();
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -29,11 +39,11 @@ $completed_items = $query->fetchAll();
 	<?php else:?>
 	<header>
 		<h1>Todo items</h1>
+		<p><a href="logout.php">Uitloggen</a></p>
 		<p>
 			<a href="item-toevoegen.php">Nieuw item toevoegen</a> <a href="categorie.php">Categorie</a>
 		</p>
 	</header>
-
 	<section>
 		<?php if (count($todoitems)): ?>
 		<ul>
@@ -42,7 +52,7 @@ $completed_items = $query->fetchAll();
 			<?php endforeach; ?>
 		</ul>
 		<?php else: ?>
-		<p>Er wijn geen todo items te doen!</p>
+		<p>Er zijn geen todo items te doen!</p>
 		<?php endif; ?>
 	</section>
 

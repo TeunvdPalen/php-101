@@ -5,17 +5,25 @@ include './includes/initialize.php';
 $query = $pdo->query('SELECT * FROM categorie');
 $categories = $query->fetchAll();
 
+$query = $pdo->prepare('SELECT * FROM gebruikers WHERE id=:id');
+$query->execute([
+	'id' => $_SESSION['user']['id']
+]);
+$gebruiker = $query->fetch();
+
+
 $foutmeldingen = [];
 
 if ($_POST) {
 	include './includes/item-validation.php';
 
 	if (empty($foutmeldingen)) {
-		$query = $pdo->prepare('INSERT INTO todo_applicatie.todo_items (omschrijving, prioriteit, categorie_id) VALUES (:omschrijving, :prioriteit, :categorie)');
+		$query = $pdo->prepare('INSERT INTO todo_applicatie.todo_items (omschrijving, prioriteit, categorie_id, gebruiker_id) VALUES (:omschrijving, :prioriteit, :categorie, :gebruiker)');
 		$query->execute([
 			'omschrijving' => $_POST['omschrijving'],
 			'prioriteit' => $_POST['prioriteit'],
-			'categorie' => $_POST['categorie']
+			'categorie' => $_POST['categorie'],
+			'gebruiker' => $gebruiker['id']			
 		]);
 		header('location: index.php');
 		exit;

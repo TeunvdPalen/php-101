@@ -8,6 +8,9 @@ $categories = $query->fetchAll();
 if (!isset($_GET['id'])) {
 	header('location: index.php');
 	exit;
+} elseif (empty($_SESSION)) {
+	header('location: index.php');
+	exit;
 }
 
 $query = $pdo->prepare('SELECT * FROM todo_items WHERE id=:id');
@@ -16,10 +19,20 @@ $query->execute([
 ]);
 $omschrijving = $query->fetch();
 
+$query = $pdo->prepare('SELECT * FROM gebruikers WHERE id=:id');
+$query->execute([
+	'id' => $_SESSION['user']['id']
+]);
+$gebruiker = $query->fetch();
+
 $foutmeldingen = [];
 
 if ($_POST) {
 	include './includes/item-validation.php';
+
+	if ($gebruiker['id'] != $omschrijving['gebruiker_id']) {
+		$foutmeldingen['login'] = "Je bent niet gemachtiged om dit aan te passen.";
+	}
 
 	if (empty($foutmeldingen)) {
 		$query = $pdo->prepare('UPDATE todo_items SET omschrijving=:omschrijving, prioriteit=:prioriteit, afgewerkt=:afgewerkt, categorie_id=:categorie WHERE id=:id');
@@ -50,6 +63,11 @@ if ($_POST) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Item aanpassen</title>
+	<style>
+	span {
+		color: red;
+	}
+	</style>
 </head>
 
 <body>
@@ -64,6 +82,9 @@ if ($_POST) {
 
 	<section>
 		<h2>Item aanpassen</h2>
+		<?php if (isset($foutmeldingen['login'])): ?>
+		<span><?php echo $foutmeldingen['login'] ?></span>
+		<?php endif; ?>
 
 		<form method="post">
 			<?php include './includes/item-form.php' ?>
