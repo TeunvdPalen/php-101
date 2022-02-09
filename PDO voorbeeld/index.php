@@ -20,6 +20,13 @@ $completed_items = $query->fetchAll();
 </head>
 
 <body>
+
+	<?php if (!isset($_SESSION['user'])) :?>
+
+	<a href="aanmelden.php">Aanmelden</a>
+
+	<a href="registratie.php">Registreren</a>
+	<?php else:?>
 	<header>
 		<h1>Todo items</h1>
 		<p>
@@ -51,6 +58,7 @@ $completed_items = $query->fetchAll();
 		<p>Er zijn geen afegwerkte items</p>
 		<?php endif; ?>
 	</section>
+	<?php endif; ?>
 </body>
 
 </html>
