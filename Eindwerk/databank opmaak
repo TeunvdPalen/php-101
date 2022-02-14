@@ -1,0 +1,49 @@
+BIER DATABANK
+
+BIEREN:
+id
+naam
+alcholpercentage
+inhoud
+prijs
+statiegeld
+brouwerij_id
+soort_id
+kleur_id
+
+
+
+BROUWERIJEN:
+id
+naam
+
+SOORTEN:
+id
+naam
+omschrijving
+		namen:
+			pils
+			lager
+			witbier
+			fruitbier
+			blond
+			ipa | Idian Pale Ale
+			stout
+			bruin
+			bok
+			dubbel
+			trippel
+			quadruppel
+			saison
+			abdijbier
+			amber
+
+KLEUREN:
+id
+kleur
+	blond
+	goud
+	amber
+	bruin
+	zwart
+	rood
