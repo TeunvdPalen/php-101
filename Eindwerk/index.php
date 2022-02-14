@@ -21,8 +21,17 @@
 
 	<main>
 		<h1>Bieren</h1>
-		<div>
-
+		<div class="bier">
+			<h3>Biernaam</h3>
+			<ul>
+				<li>soort</li>
+				<li>kleur</li>
+				<li>brouwerij</li>
+				<li>alchol</li>
+				<li>prijs</li>
+				<li>statiegeld</li>
+				<li>inhoud</li>
+			</ul>
 		</div>
 	</main>
 

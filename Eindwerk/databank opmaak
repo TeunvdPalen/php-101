@@ -16,6 +16,30 @@ kleur_id
 BROUWERIJEN:
 id
 naam
+	Duvel moortgat
+		Duvel
+		Vedett
+		Maredsous
+	Achouffe
+		La chouffe
+		Cherry chouffe (kriek)
+		Houblon chouffe (ipa)
+		Chouffe bok 6666	(bock/bok)
+	Brouwerij het ij
+		Zatte tripel
+		I.P.A
+		Natte (dubbel)
+		Columbus (amber)
+	Brouwerij bosteels
+		tripel karmeliet
+		pauwel kwak
+		DeuS
+	Lupulus
+		lupulus pils
+		lupulus brune
+		lupulus hopera (ipa)
+	Brouwerij vandijck
+		Slijkvisser
 
 SOORTEN:
 id
