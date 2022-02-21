@@ -1,0 +1,96 @@
+body {
+	margin: 0;
+	font-family: Helvetica, sans-serif;
+}
+
+.container {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.error {
+	color: red;
+}
+
+a {
+	text-decoration: none;
+	color: #212529;
+}
+
+a:hover {
+	color: rgb(1, 156, 105);
+}
+
+nav > a {
+	padding-left: 2rem;
+}
+
+.logo {
+	color: aquamarine;
+}
+
+.logo:hover {
+	color: aquamarine;
+}
+
+header {
+	background-color: gray;
+	margin-bottom: 2rem;
+}
+.header {
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem 0;
+}
+
+.details {
+	font-size: large;
+	padding-left: 2rem;
+}
+
+.inloggen {
+	margin-top: 5rem;
+}
+.form-signin {
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: auto;
+}
+.form-signin .checkbox {
+	font-weight: 400;
+}
+.form-signin .form-control {
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	padding: 10px;
+	font-size: 16px;
+}
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+.form-signin input[type='email'] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.form-signin input[type='password'] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.btn-primary {
+	margin-top: 1rem;
+}
+
+.verwijderen {
+	color: red;
+}
+
+.verwijderen:hover {
+	color: darkred;
+}

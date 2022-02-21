@@ -16,58 +16,58 @@ kleur_id
 BROUWERIJEN:
 id
 naam
-	Duvel moortgat
-		Duvel
-		Vedett
-		Maredsous
-	Achouffe
-		La chouffe
-		Cherry chouffe (kriek)
-		Houblon chouffe (ipa)
-		Chouffe bok 6666	(bock/bok)
-	Brouwerij het ij
-		Zatte tripel
-		I.P.A
-		Natte (dubbel)
-		Columbus (amber)
-	Brouwerij bosteels
-		tripel karmeliet
-		pauwel kwak
-		DeuS
-	Lupulus
-		lupulus pils
-		lupulus brune
-		lupulus hopera (ipa)
-	Brouwerij vandijck
-		Slijkvisser
+	1 Duvel moortgat
+			1 Duvel
+			2 Vedett
+			3 Maredsous
+	2 Achouffe
+			4 La chouffe
+			5 Cherry chouffe (kriek)
+			6 Houblon chouffe (ipa)
+			7 Chouffe bok 6666	(bock/bok)
+	3 Brouwerij het ij
+			8 Zatte tripel
+			9 I.P.A
+			10 Natte (dubbel)
+			11 Columbus (amber)
+	4 Brouwerij bosteels
+			12 tripel karmeliet
+			13 pauwel kwak
+			14 DeuS
+	5 Lupulus
+			15 lupulus pils
+			16 lupulus brune
+			17 lupulus hopera (ipa)
+	6 Brouwerij vandijck
+			18 Slijkvisser
 
 SOORTEN:
 id
 naam
 omschrijving
 		namen:
-			pils
-			lager
-			witbier
-			fruitbier
-			blond
-			ipa | Idian Pale Ale
-			stout
-			bruin
-			bok
-			dubbel
-			trippel
-			quadruppel
-			saison
-			abdijbier
-			amber
+		1	pils
+		2	lager
+		3	witbier
+		4	fruitbier
+		5	blond
+		6	ipa | Idian Pale Ale
+		7	stout
+		8	bruin
+		9	bok
+		10	dubbel
+		11	trippel
+		12	quadruppel
+		13	saison
+		14	abdijbier
+		15	amber
 
 KLEUREN:
 id
 kleur
-	blond
-	goud
-	amber
-	bruin
-	zwart
-	rood
+	1 blond
+	2 goud
+	3 amber
+	4 bruin
+	5 zwart
+	6 rood

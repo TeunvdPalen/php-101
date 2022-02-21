@@ -2,12 +2,7 @@
 
 include './includes/initialize.php';
 
-$query = $pdo->query('SELECT * FROM bieren;');
-$bieren = $query->fetchAll();
-
-if ($_GET) {
-	$error = $_GET['error'];
-}
+include './includes/admin-validatie.php';
 
 ?>
 <!DOCTYPE html>
@@ -15,7 +10,7 @@ if ($_GET) {
 
 <head>
   <?php include './includes/meta.php' ?>
-  <title>Bierhandelaar</title>
+  <title>Toevoegen</title>
 </head>
 
 <body>
@@ -23,15 +18,13 @@ if ($_GET) {
 
   <main>
     <div class="container">
-      <h1>Bieren</h1>
-
-      <?php if (isset($error)) : ?>
-      <h1 class="error"><?php echo $error ?></h1>
-      <?php endif ?>
-
-      <div class="bier">
-        <?php include './includes/table.php' ?>
-      </div>
+      <h1>Toevoegen</h1>
+      <h4>Kies waar je iets aan wilt toevoegen</h4>
+      <ul>
+        <li><a href="toevoegen-bier.php">Bier</a></li>
+        <li><a href="toevoegen-brouwerij.php">Brouwerij</a></li>
+        <li><a href="toevoegen-soort.php">Soort</a></li>
+      </ul>
     </div>
   </main>
 
