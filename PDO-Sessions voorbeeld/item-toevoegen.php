@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include './includes/initialize.php';
 
@@ -23,7 +23,7 @@ if ($_POST) {
 			'omschrijving' => $_POST['omschrijving'],
 			'prioriteit' => $_POST['prioriteit'],
 			'categorie' => $_POST['categorie'],
-			'gebruiker' => $gebruiker['id']			
+			'gebruiker' => $gebruiker['id']
 		]);
 		header('location: index.php');
 		exit;
@@ -35,31 +35,31 @@ if ($_POST) {
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Item toevoegen</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item toevoegen</title>
 </head>
 
 <body>
-	<header>
-		<h1>Todo items</h1>
+  <header>
+    <h1>Todo items</h1>
+    <pre><?php var_dump($_POST) ?></pre>
+    <p>
+      <a href="index.php">Todo items</a> <a href="categorie.php">categorie overzicht</a>
+    </p>
+  </header>
 
-		<p>
-			<a href="index.php">Todo items</a> <a href="categorie.php">categorie overzicht</a>
-		</p>
-	</header>
+  <section>
+    <h2>Item toevoegen</h2>
 
-	<section>
-		<h2>Item toevoegen</h2>
-
-		<form method="post">
-			<?php include './includes/item-form.php' ?>
-			<div>
-				<input type="submit" value="Toevoegen">
-			</div>
-		</form>
-	</section>
+    <form method="post">
+      <?php include './includes/item-form.php' ?>
+      <div>
+        <input type="submit" value="Toevoegen">
+      </div>
+    </form>
+  </section>
 </body>
 
 </html>

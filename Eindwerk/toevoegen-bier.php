@@ -14,7 +14,6 @@ $query = $pdo->query('SELECT * FROM soorten');
 $soorten = $query->fetchAll();
 
 $foutmeldingen = [];
-$decimaal = '/^(0|[1-9]\d*)(\.\d+)?$/';
 
 if ($_POST) {
 
@@ -24,34 +23,34 @@ if ($_POST) {
     $foutmeldingen = 'Naam mag niet langer als 255 tekens zijn';
   }
 
-  if (empty($_POST['alchohol'])) {
-    $foutmeldingen['alchohol'] = 'alchohol is verplicht';
-  } elseif (strlen($_POST['alchohol']) > 4) {
-    $foutmeldingen = 'alchohol mag niet langer als 4 tekens zijn';
-  } elseif (!preg_match($decimaal, $_POST['alchohol'])) {
-    $foutmeldingen = 'alchohol mag alleen getallen bevatten';
+  if (!$_POST['alchohol']) {
+    $foutmeldingen['alchohol'] = 'Je moet een alchoholpercentage invullen';
+  } elseif (!is_numeric($_POST['alchohol'])) {
+    $foutmeldingen['alchohol'] = 'De alchoholpercentage mag alleen nummers bevatten';
+  } elseif (strlen($_POST['inhoud']) > 4) {
+    $foutmeldingen['inhoud'] = 'Mag niet meer als 4 cijfers bevatten';
   }
 
-  if (empty($_POST['inhoud'])) {
-    $foutmeldingen['inhoud'] = 'inhoud is verplicht';
+  if (!$_POST['inhoud']) {
+    $foutmeldingen['inhoud'] = 'Je moet een inhoud invullen';
+  } elseif (!is_numeric($_POST['inhoud'])) {
+    $foutmeldingen['inhoud'] = 'De inhoud mag alleen nummers bevatten';
   } elseif (strlen($_POST['inhoud']) > 6) {
-    $foutmeldingen = 'inhoud mag niet langer als 6 tekens zijn';
-  } elseif (!preg_match($decimaal, $_POST['inhoud'])) {
-    $foutmeldingen = 'inhoud mag alleen getallen bevatten';
+    $foutmeldingen['inhoud'] = 'Mag niet meer als 6 cijfers bevatten';
   }
 
-  if (empty($_POST['prijs'])) {
-    $foutmeldingen['prijs'] = 'prijs is verplicht';
+  if (!$_POST['prijs']) {
+    $foutmeldingen['prijs'] = 'Je moet een prijs invullen';
+  } elseif (!is_numeric($_POST['prijs'])) {
+    $foutmeldingen['prijs'] = 'De prijs mag alleen nummers bevatten';
   } elseif (strlen($_POST['prijs']) > 6) {
-    $foutmeldingen = 'prijs mag niet langer als 6 tekens zijn';
-  } elseif (!preg_match($decimaal, $_POST['prijs'])) {
-    $foutmeldingen = 'prijs mag alleen getallen bevatten';
+    $foutmeldingen['prijs'] = 'Mag niet meer als 6 cijfers bevatten';
   }
 
-  if (strlen($_POST['statiegeld']) > 4) {
-    $foutmeldingen = 'statiegeld mag niet langer als 4 tekens zijn';
-  } elseif (is_numeric($_POST['statiegeld'])) {
-    $foutmeldingen = 'statiegeld mag alleen getallen bevatten';
+  if (!is_numeric($_POST['statiegeld'])) {
+    $foutmeldingen['statiegeld'] = 'De statiegeld mag alleen nummers bevatten';
+  } elseif (strlen($_POST['statiegeld']) > 4) {
+    $foutmeldingen['statiegeld'] = 'Mag niet meer als  4 cijfers bevatten';
   }
 
   if (!isset($_POST['brouwerij_id'])) {
@@ -67,7 +66,7 @@ if ($_POST) {
   }
 
   if (empty($foutmeldingen)) {
-    $query = $pdo->prepare("INSERT INTO `bieren` (`naam`, `alchoholpercentage`, `inhoud`, `prijs`, `statiegeld`, `brouwerij_id`, `soort_id`, `kleur_id`) VALUES (:naam, :alcohol, :inhoud, :prijs, :statiegeld, :brouwerij_id, :soort_id, :kleur_id)");
+    $query = $pdo->prepare("INSERT INTO `bieren` (`naam`, `alchoholpercentage`, `inhoud`, `prijs`, `statiegeld`, `brouwerij_id`, `soort_id`, `kleur_id`) VALUES (:naam, :alchohol, :inhoud, :prijs, :statiegeld, :brouwerij_id, :soort_id, :kleur_id)");
     $query->execute([
       'naam' => $_POST['naam'],
       'alchohol' => $_POST['alchohol'],
@@ -76,7 +75,7 @@ if ($_POST) {
       'statiegeld' => $_POST['statiegeld'],
       'brouwerij_id' => $_POST['brouwerij_id'],
       'soort_id' => $_POST['soort_id'],
-      'kleur_id' => $_POST['kleur_id']
+      'kleur_id' => $_POST['kleur_id'],
     ]);
     header('location: toevoegen.php');
     exit;
@@ -97,7 +96,7 @@ if ($_POST) {
 
   <main>
     <section class="text-center">
-      <pre><?php print_r($_POST) ?></pre>
+      <pre><?php var_dump($_POST) ?></pre>
       <h2>Bier toevoegen</h2>
 
       <form class="form-signin" method="POST" novalidate>

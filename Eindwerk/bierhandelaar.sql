@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 14 feb 2022 om 09:58
--- Serverversie: 10.4.21-MariaDB
--- PHP-versie: 8.0.11
+-- Gegenereerd op: 21 feb 2022 om 02:48
+-- Serverversie: 10.4.22-MariaDB
+-- PHP-versie: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,6 +39,32 @@ CREATE TABLE `bieren` (
   `kleur_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `bieren`
+--
+
+INSERT INTO `bieren` (`id`, `naam`, `alchoholpercentage`, `inhoud`, `prijs`, `statiegeld`, `brouwerij_id`, `soort_id`, `kleur_id`) VALUES
+(1, 'Duvel', 8.5, 33, 1.4, 0.1, 1, 5, 1),
+(2, 'Vedett', 4.7, 33, 1.07, 0.1, 1, 1, 1),
+(3, 'Maredsous', 10, 33, 1.74, 0.1, 1, 11, 2),
+(4, 'La chouffe', 8, 75, 3.8, 0.1, 2, 5, 2),
+(5, 'Chouffe cherry', 8, 33, 1.57, 0.1, 2, 4, 6),
+(6, 'Houblon chouffe', 9, 33, 1.76, 0.1, 2, 6, 1),
+(7, 'Chouffe bok', 6.6, 33, 1.82, 0.1, 2, 9, 4),
+(8, 'Zatte tripel', 8, 33, 2.49, 0, 3, 11, 2),
+(9, 'I.P.A.', 7, 33, 2.49, 0, 3, 6, 1),
+(10, 'Natte', 6.5, 33, 2.49, 0, 3, 10, 4),
+(11, 'Columbus', 9, 33, 2.49, 0, 3, 6, 3),
+(12, 'Tripel karmeliet', 8.4, 33, 1.84, 0.1, 4, 11, 1),
+(13, 'Kwak', 8.4, 75, 5, 0, 4, 5, 1),
+(14, 'DeuS', 11.5, 75, 15.95, 0, 4, 5, 1),
+(15, 'Lupulus pils', 5, 33, 1.8, 0.1, 5, 1, 1),
+(16, 'Lupulus brune', 8.5, 33, 1.89, 0.1, 5, 8, 4),
+(17, 'Lupulus hopera', 6, 33, 1.89, 0.1, 5, 6, 2),
+(18, 'Slijkvisser', 11, 33, 2.3, 0, 6, 11, 2),
+(19, 'Session IPA', 4, 33, 2.39, 0, 3, 6, 1),
+(20, 'Vedett IPA', 8, 33, 1.8, 0.1, 1, 6, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +75,41 @@ CREATE TABLE `brouwerijen` (
   `id` int(10) UNSIGNED NOT NULL,
   `naam` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `brouwerijen`
+--
+
+INSERT INTO `brouwerijen` (`id`, `naam`) VALUES
+(1, 'Duvel moortgat'),
+(2, 'Achouffe'),
+(3, 'Brouwerij het ij'),
+(4, 'Brouwerij bosteels'),
+(5, 'Lupulus'),
+(6, 'Brouwerij vandijck'),
+(7, 'InBev');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `gebruikers`
+--
+
+CREATE TABLE `gebruikers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(16) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` text NOT NULL,
+  `admin` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `gebruikers`
+--
+
+INSERT INTO `gebruikers` (`id`, `username`, `email`, `password`, `admin`) VALUES
+(2, 'admin', 'admin@mail.com', '$2y$10$nCHz3jb5zUoX8hCB6d5FF.Jx10/2Rag0xI6bXZdxgivrGjZ3FVNtC', 1),
+(3, 'test', 'test@mail.com', '$2y$10$RKwwliGngBqgfjjXBGLEvO/oL/5oFqJX23WlpUSUZPlIWlBdEgelq', 0);
 
 -- --------------------------------------------------------
 
@@ -123,6 +184,12 @@ ALTER TABLE `brouwerijen`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `gebruikers`
+--
+ALTER TABLE `gebruikers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `kleuren`
 --
 ALTER TABLE `kleuren`
@@ -142,13 +209,19 @@ ALTER TABLE `soorten`
 -- AUTO_INCREMENT voor een tabel `bieren`
 --
 ALTER TABLE `bieren`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT voor een tabel `brouwerijen`
 --
 ALTER TABLE `brouwerijen`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT voor een tabel `gebruikers`
+--
+ALTER TABLE `gebruikers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `kleuren`
@@ -160,7 +233,7 @@ ALTER TABLE `kleuren`
 -- AUTO_INCREMENT voor een tabel `soorten`
 --
 ALTER TABLE `soorten`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
